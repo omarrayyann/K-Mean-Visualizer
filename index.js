@@ -22,6 +22,17 @@ const colors = [
   '#00FFFF', '#FFCC00', '#9900FF', '#33FFCC', '#FF3300'
 ];
 
+document.getElementById('clearAll').addEventListener('click', () => {
+  // Remove all points and clusters from the visualizer
+  points.forEach(point => visualizer.removeChild(point.element));
+  clusters.forEach(cluster => visualizer.removeChild(cluster.element));
+
+  // Clear the points and clusters arrays
+  points.length = 0;
+  clusters.length = 0;
+});
+
+
 for (let i = 1; i < 50; i++) {
   const line = document.createElement('div');
   line.classList.add('horizontal-line');

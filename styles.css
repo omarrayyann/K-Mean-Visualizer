@@ -71,3 +71,18 @@ body {
 .add-cluster-btn.active {
   background-color: #4caf50; /* Change to the active color */
 }
+
+.clear-btn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #d85436; /* Red color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.clear-btn:hover {
+  background-color: #ff8c66; /* Lighter red on hover */
+}
