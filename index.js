@@ -10,7 +10,14 @@ class PointData {
   setColor(color) {
     this.element.style.backgroundColor = color;
     this.color = color;
-    // You can add more styling changes or logic as needed
+
+  }
+
+  setPosition(x,y) {
+    this.element.style.left = x + 'px';
+    this.element.style.top  = y + 'px';  
+    this.x = x;
+    this.y = y;
   }
 }
 
@@ -48,8 +55,8 @@ for (let i = 1; i < 50; i++) {
   visualizer.appendChild(line);
 }
 
-const points = [];
-const clusters = [];
+var points = [];
+var clusters = [];
 let isAddingPoints = false;
 let isAddingClusters = false;
 
@@ -77,6 +84,7 @@ function addPoint(event, isCluster = false) {
     pointData.setColor(color); // Set color for cluster points
     console.log("added cluster")
   } else {
+    pointData.setColor("#00000"); 
     points.push(pointData);
     console.log("added point")
   }
@@ -117,4 +125,62 @@ document.getElementById('toggleAddCluster').addEventListener('click', () => {
   visualizer.style.cursor = 'crosshair';
   document.getElementById('toggleAddCluster').classList.add('active');
   document.getElementById('toggleAddPoint').classList.remove('active');
+});
+
+
+function classify () {
+  for (let point of points){
+    
+    var dist = 9999999999;
+    var color = '#000000';
+    for (let cluster of clusters) {
+      var current_dist = ((cluster.x-point.x)**2 + (cluster.y-point.y)**2) ** 0.5;
+      if(current_dist<dist){
+        dist = current_dist;
+        color = cluster.color
+      }
+    }
+    point.setColor(color);
+}
+}
+
+function updateClusters() {
+
+  for (let cluster of clusters) {
+    let totalX = 0;
+    let totalY = 0;
+    let count = 0;
+
+    for (let point of points) {
+      if (point.color === cluster.color) { // Check if the point belongs to the cluster
+        totalX += point.x;
+        totalY += point.y;
+        count++;
+      }
+    }
+
+
+    if (count > 0) {
+
+      const avgX = totalX / count;
+      const avgY = totalY / count;
+      console.log("avgx: ", avgX);
+      console.log("avgy: ", avgY);
+      cluster.setPosition(avgX,avgY);
+    }
+  }
+}
+
+document.getElementById('classifyPoints').addEventListener('click', () => {
+
+  classify()
+
+});
+
+
+document.getElementById('setNewClusters').addEventListener('click', () => {
+
+  
+  updateClusters()
+
 });

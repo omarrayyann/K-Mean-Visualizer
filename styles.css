@@ -40,8 +40,10 @@ body {
 }
 
 .cluster-point {
-  width: 12px; /* Increase the size of cluster points */
-  height: 12px; /* Increase the size of cluster points */
+  width: 16px; /* Increase the size of cluster points */
+  height: 16px; /* Increase the size of cluster points */
+  border: 1px solid black; /* Add a black border around cluster points */
+  border-radius: 50%; /* Make the cluster points round */
 }
 
 .buttons {
@@ -70,6 +72,28 @@ body {
 .add-point-btn.active,
 .add-cluster-btn.active {
   background-color: #4caf50; /* Change to the active color */
+}
+
+.classify-btn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.update-clusters-btn {
+  padding: 10px 20px;
+  margin: 0 10px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
 }
 
 .clear-btn {
